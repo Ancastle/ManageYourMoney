@@ -10,8 +10,6 @@ import colors from "../config/colors";
 
 function AddExpenceScreen(props) {
   const [isAddRegisterOpen, setIsAddRegisterOpen] = React.useState(true);
-  const [isRegisterDetailsOpen, setIsRegisterDetailsOpen] =
-    React.useState(false);
 
   const [expences, setExpences] = React.useState([]);
 
@@ -26,11 +24,11 @@ function AddExpenceScreen(props) {
 
   const handleSave = React.useCallback((newExpence) => {
     setExpences([...expences, newExpence]);
-    setIsModalOpen(false);
+    setIsAddRegisterOpen(false);
   });
 
   const handleCancel = React.useCallback(() => {
-    setIsModalOpen(false);
+    setIsAddRegisterOpen(false);
   });
 
   console.log(expences);
@@ -58,7 +56,7 @@ function AddExpenceScreen(props) {
       <View style={styles.container}>
         <TouchableAction
           containerStyles={styles.addExpenceButton}
-          action={() => setIsModalOpen(true)}
+          action={() => setIsAddRegisterOpen(true)}
           text="Add an Expence"
         />
         <TouchableAction

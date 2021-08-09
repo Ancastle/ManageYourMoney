@@ -1,35 +1,34 @@
 import * as React from "react";
-import { View, StyleSheet, Text, Dimensions } from "react-native";
+import { View, StyleSheet, Text, Pressable } from "react-native";
 
 export default function Row(props) {
-  return (
+  return props.isHeader ? (
     <View style={props.rowStyle}>
-      {props.isHeader ? (
-        <>
-          <View style={(styles.col1, styles.col)}>
-            <Text>Date</Text>
-          </View>
-          <View style={(styles.col2, styles.col)}>
-            <Text>Name</Text>
-          </View>
-          <View style={(styles.col3, styles.col)}>
-            <Text>Value</Text>
-          </View>
-        </>
-      ) : (
-        <>
-          <View style={(styles.col1, styles.col)}>
-            <Text>{`${props.rowData.day.day}/${props.rowData.day.month}`}</Text>
-          </View>
-          <View style={(styles.col2, styles.col)}>
-            <Text>{props.rowData.name}</Text>
-          </View>
-          <View style={(styles.col3, styles.col)}>
-            <Text>{`$ ${props.rowData.value}`}</Text>
-          </View>
-        </>
-      )}
+      <View style={(styles.col1, styles.col)}>
+        <Text>Date</Text>
+      </View>
+      <View style={(styles.col2, styles.col)}>
+        <Text>Name</Text>
+      </View>
+      <View style={(styles.col3, styles.col)}>
+        <Text>Value</Text>
+      </View>
     </View>
+  ) : (
+    <Pressable
+      onPress={() => props.handlePress(props.rowData)}
+      style={props.rowStyle}
+    >
+      <View style={(styles.col1, styles.col)}>
+        <Text>{`${props.rowData.day.day}/${props.rowData.day.month}`}</Text>
+      </View>
+      <View style={(styles.col2, styles.col)}>
+        <Text>{props.rowData.name}</Text>
+      </View>
+      <View style={(styles.col3, styles.col)}>
+        <Text>{`$ ${props.rowData.value}`}</Text>
+      </View>
+    </Pressable>
   );
 }
 

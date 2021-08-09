@@ -9,7 +9,7 @@ import TouchableAction from "./components/Touchables/TouchableAction";
 import colors from "../config/colors";
 
 function AddEntryScreen(props) {
-  const [isModalOpen, setIsModalOpen] = React.useState(true);
+  const [isAddRegisterOpen, setIsAddRegisterOpen] = React.useState(true);
 
   const [entrys, setEntrys] = React.useState([]);
 
@@ -20,11 +20,11 @@ function AddEntryScreen(props) {
 
   const handleSave = React.useCallback((newEntry) => {
     setEntrys([...entrys, newEntry]);
-    setIsModalOpen(false);
+    setIsAddRegisterOpen(false);
   });
 
   const handleCancel = React.useCallback(() => {
-    setIsModalOpen(false);
+    setIsAddRegisterOpen(false);
   });
 
   return (
@@ -36,7 +36,7 @@ function AddEntryScreen(props) {
           titleColor={colors.white}
         />
         <AddRegisterModal
-          isModalOpen={isModalOpen}
+          isModalOpen={isAddRegisterOpen}
           type="entry"
           headerText="Adding new entry"
           namePlaceholder="Entry name"
@@ -46,11 +46,11 @@ function AddEntryScreen(props) {
           handleCancel={handleCancel}
         />
       </View>
-      <Table></Table>
+      <Table data={entrys} />
       <View style={styles.container}>
         <TouchableAction
           containerStyles={styles.addEntryButton}
-          action={() => setIsModalOpen(true)}
+          action={() => setIsAddRegisterOpen(true)}
           text="Add an Entry"
         />
         <TouchableAction
