@@ -31,8 +31,6 @@ function AddExpenceScreen(props) {
     setIsAddRegisterOpen(false);
   });
 
-  console.log(expences);
-
   return (
     <View style={styles.main}>
       <View style={styles.container}>

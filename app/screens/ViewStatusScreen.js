@@ -1,14 +1,8 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import Header from "./components/Header";
+import Table from "./components/Table";
 import colors from "../config/colors";
 
 function ViewStatusScreen(props) {
@@ -19,6 +13,7 @@ function ViewStatusScreen(props) {
         title="View Status"
         titleColor={colors.black}
       />
+      <Table />
     </View>
   );
 }

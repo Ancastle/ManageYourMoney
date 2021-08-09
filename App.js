@@ -5,7 +5,6 @@ import WelcomeScreen from "./app/screens/WelcomeScreen";
 import AddEntryScreen from "./app/screens/AddEntryScreen";
 import AddExpenceScreen from "./app/screens/AddExpenceScreen";
 import ViewStatusScreen from "./app/screens/ViewStatusScreen";
-import { ViewPagerAndroidBase } from "react-native";
 
 export default function App() {
   return (
