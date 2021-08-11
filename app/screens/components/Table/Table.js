@@ -19,6 +19,17 @@ export default function Table(props) {
     setIsDetailOpen(true);
   });
 
+  const data = React.useMemo(() => {
+    console.log(props.type);
+    if (props.type === "expence") {
+      return props.data.filter((register) => register.type === "expence");
+    } else if (props.type === "entry") {
+      return props.data.filter((register) => register.type === "entry");
+    } else {
+      return props.data;
+    }
+  }, [props.data]);
+
   return (
     <View style={styles.gridContainer}>
       {rowData && (
@@ -50,8 +61,8 @@ export default function Table(props) {
         </Dialog>
       )}
       <Row isHeader rowStyle={styles.gridHeader} />
-      {props.data &&
-        props.data.map((register, index) => (
+      {data &&
+        data.map((register, index) => (
           <Row
             key={index}
             handlePress={handlePress}

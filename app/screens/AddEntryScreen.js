@@ -1,5 +1,6 @@
 import * as React from "react";
 import { StyleSheet, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Header from "./components/Header";
 import AddRegisterModal from "./components/AddRegisterModal";
@@ -11,20 +12,44 @@ import colors from "../config/colors";
 function AddEntryScreen(props) {
   const [isAddRegisterOpen, setIsAddRegisterOpen] = React.useState(true);
 
-  const [entrys, setEntrys] = React.useState([]);
+  const [registers, setRegisters] = React.useState([]);
 
   const [categories, setCategories] = React.useState([
     { label: "Comida", value: "category1" },
     { label: "Mercado", value: "category2" },
   ]);
 
-  const handleSave = React.useCallback((newEntry) => {
-    setEntrys([...entrys, newEntry]);
+  const handleSave = React.useCallback((newRegister) => {
+    setRegisters([...registers, newRegister]);
+    if (registers.length > 0) {
+      storeData([...registers, newRegister]);
+    }
     setIsAddRegisterOpen(false);
   });
 
   const handleCancel = React.useCallback(() => {
     setIsAddRegisterOpen(false);
+  });
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("registerHistory_Key");
+      const parsed = JSON.parse(value);
+      setRegisters(parsed.registers);
+    } catch (e) {}
+  };
+
+  const storeData = async (registers) => {
+    try {
+      const jsonValue = JSON.stringify({ registers: registers });
+      await AsyncStorage.setItem("registerHistory_Key", jsonValue);
+    } catch (e) {}
+  };
+
+  React.useEffect(() => {
+    if (registers.length === 0) {
+      getData();
+    }
   });
 
   return (
@@ -46,7 +71,7 @@ function AddEntryScreen(props) {
           handleCancel={handleCancel}
         />
       </View>
-      <Table data={entrys} />
+      <Table data={registers} type="entry" />
       <View style={styles.container}>
         <TouchableAction
           containerStyles={styles.addEntryButton}
