@@ -51,6 +51,11 @@ function AddRegisterModal(props) {
     resetInputs();
   });
 
+  const categories = React.useMemo(
+    () => props.categories.filter((category) => category.type === props.type),
+    [props.categories]
+  );
+
   const isSaveDisabled = !expenceValue || !nameInput || !dropdownValue;
 
   return (
@@ -83,7 +88,7 @@ function AddRegisterModal(props) {
             />
             <DropDownPicker
               open={isDropdownOpen}
-              items={props.categories}
+              items={categories}
               setOpen={() => {
                 setIsDropdownOpen(!isDropdownOpen);
                 Keyboard.dismiss();

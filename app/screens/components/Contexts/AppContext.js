@@ -8,12 +8,13 @@ export default function AppProvider({ children }) {
   const [registers, setRegisters] = React.useState([]);
 
   const [categories, setCategories] = React.useState([
-    { label: "Comida", value: "Comida" },
-    { label: "Mercado", value: "Mercado" },
-    { label: "Lujos", value: "Lujos" },
-    { label: "Salida", value: "Salida" },
-    { label: "Lujo necesario", value: "Lujo necesario" },
-    { label: "No se que mas", value: "No se que mas" },
+    { label: "Salario", value: "Salario", type: "entry" },
+    { label: "Comida", value: "Comida", type: "expence" },
+    { label: "Mercado", value: "Mercado", type: "expence" },
+    { label: "Lujos", value: "Lujos", type: "expence" },
+    { label: "Salida", value: "Salida", type: "expence" },
+    { label: "Lujo necesario", value: "Lujo necesario", type: "expence" },
+    { label: "No se que mas", value: "No se que mas", type: "expence" },
   ]);
 
   const [hasFetchedRegisters, setHasFetchedRegisters] = React.useState(false);
