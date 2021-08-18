@@ -1,13 +1,11 @@
+// External Libraries
 import * as React from "react";
-import { View, StyleSheet, Text } from "react-native";
-import Dialog, {
-  DialogContent,
-  DialogFooter,
-  DialogButton,
-} from "react-native-popup-dialog";
+import { View, StyleSheet, Text, Modal, Pressable } from "react-native";
 
+// Components
 import Row from "./Row";
 
+// Config
 import colors from "../../../config/colors";
 
 export default function Table(props) {
@@ -32,32 +30,34 @@ export default function Table(props) {
   return (
     <View style={styles.gridContainer}>
       {rowData && (
-        <Dialog
+        <Modal
           visible={isDetailOpen}
-          onTouchOutside={() => {
-            setIsDetailOpen(false);
-          }}
-          width={0.9}
-          footer={
-            <DialogFooter>
-              <DialogButton
-                text="OK"
-                onPress={() => {
-                  setIsDetailOpen(false);
-                }}
-              />
-            </DialogFooter>
-          }
+          animationIn={"slideInLeft"}
+          animationOut={"slideOutRight"}
         >
-          <DialogContent>
-            <Text>Name: {rowData.name}</Text>
-            <Text>Value: {rowData.value}</Text>
-            <Text>Date: {`${rowData.day.day}/${rowData.day.month}`}</Text>
-            <Text>Hour: {`${rowData.hour.hour}/${rowData.hour.minutes}`}</Text>
-            <Text>Loan: {rowData.isLoan ? "Yes" : "No"}</Text>
-            <Text>Type: {rowData.type === "entry" ? "Entry" : "Expence"}</Text>
-          </DialogContent>
-        </Dialog>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text>Name: {rowData.name}</Text>
+              <Text>Value: {rowData.value}</Text>
+              <Text>Date: {`${rowData.day.day}/${rowData.day.month}`}</Text>
+              <Text>
+                Hour: {`${rowData.hour.hour}/${rowData.hour.minutes}`}
+              </Text>
+              <Text>Loan: {rowData.isLoan ? "Yes" : "No"}</Text>
+              <Text>
+                Type: {rowData.type === "entry" ? "Entry" : "Expence"}
+              </Text>
+              <View style={styles.actionContainer}>
+                <Pressable
+                  style={styles.button}
+                  onPress={() => setIsDetailOpen(false)}
+                >
+                  <Text style={styles.textStyle}>Ok</Text>
+                </Pressable>
+              </View>
+            </View>
+          </View>
+        </Modal>
       )}
       <Row isHeader rowStyle={styles.gridHeader} />
       {data &&
@@ -102,5 +102,42 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-between",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  actionContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    backgroundColor: "#2196F3",
+    width: 150,
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });

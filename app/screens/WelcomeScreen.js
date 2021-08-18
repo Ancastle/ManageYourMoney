@@ -1,8 +1,11 @@
+// External Libraries
 import React from "react";
 import { StyleSheet, View, Image, Text } from "react-native";
 
+// Components
 import TouchableLink from "./components/Touchables/TouchableLink";
 
+// Config
 import colors from "../config/colors";
 
 function WelcomeScreen(props) {

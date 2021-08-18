@@ -1,3 +1,4 @@
+// External Libraries
 import React from "react";
 import {
   View,
@@ -12,6 +13,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import CurrencyInput from "react-native-currency-input";
 import CheckBox from "@react-native-community/checkbox";
 
+// Components
 import DismissKeyboard from "./DismissKeyboard";
 
 function AddRegisterModal(props) {

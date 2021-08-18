@@ -1,27 +1,33 @@
+// External Libraries
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StyleSheet, View, Text } from "react-native";
 
+// Context
+import { AppContext } from "./components/Contexts/AppContext";
+
+// Components
 import Header from "./components/Header";
 import Table from "./components/Table";
+
+// Config
 import colors from "../config/colors";
 
 function ViewStatusScreen(props) {
-  const [registers, setRegisters] = React.useState([]);
-
-  const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem("registerHistory_Key");
-      const parsed = JSON.parse(value);
-      setRegisters(parsed.registers);
-    } catch (e) {}
-  };
+  const {
+    registers,
+    fetchRegisters,
+    hasFetchedRegisters,
+    setHasFetchedRegisters,
+    totalBalance,
+  } = React.useContext(AppContext);
 
   React.useEffect(() => {
-    if (registers.length === 0) {
-      getData();
+    if (!hasFetchedRegisters) {
+      setHasFetchedRegisters(true);
+      fetchRegisters();
     }
   });
+
   return (
     <View style={styles.main}>
       <Header
@@ -30,6 +36,7 @@ function ViewStatusScreen(props) {
         titleColor={colors.black}
       />
       <Table data={registers} />
+      <Text stlye={styles.total}>{totalBalance}</Text>
     </View>
   );
 }
@@ -39,6 +46,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
+  total: { bottom: 15, fontSize: 20 },
 });
 
 export default ViewStatusScreen;

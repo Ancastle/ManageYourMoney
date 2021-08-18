@@ -1,3 +1,4 @@
+// External Libraries
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
