@@ -2,6 +2,10 @@ import * as React from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 
 export default function Row(props) {
+  const currencyFormat = (num) => {
+    return "$" + num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+  };
+
   return props.isHeader ? (
     <View style={props.rowStyle}>
       <View style={(styles.col1, styles.col)}>
@@ -26,7 +30,7 @@ export default function Row(props) {
         <Text>{props.rowData.name}</Text>
       </View>
       <View style={(styles.col3, styles.col)}>
-        <Text>{`$ ${props.rowData.value}`}</Text>
+        <Text>{currencyFormat(props.rowData.value)}</Text>
       </View>
     </Pressable>
   );

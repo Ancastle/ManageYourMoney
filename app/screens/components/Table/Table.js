@@ -20,7 +20,6 @@ export default function Table(props) {
   });
 
   const data = React.useMemo(() => {
-    console.log(props.type);
     if (props.type === "expence") {
       return props.data.filter((register) => register.type === "expence");
     } else if (props.type === "entry") {
