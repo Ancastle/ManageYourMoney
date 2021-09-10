@@ -118,14 +118,14 @@ function AddRegisterModal(props) {
                 <Text style={styles.textStyle}>Save</Text>
               </Pressable>
             </View>
-            <View style={styles.checkboxContainer}>
+            {/* <View style={styles.checkboxContainer}>
               <CheckBox
                 disabled={false}
                 value={isLoan}
                 onValueChange={() => setIsLoan(!isLoan)}
               />
               <Text style={styles.checkboxText}>{props.checkboxLabel}</Text>
-            </View>
+            </View> */}
           </View>
         </View>
       </DismissKeyboard>

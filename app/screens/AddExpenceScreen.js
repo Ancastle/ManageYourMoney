@@ -10,12 +10,16 @@ import Header from "./components/Header";
 import AddRegisterModal from "./components/AddRegisterModal";
 import TouchableAction from "./components/Touchables/TouchableAction";
 import Table from "./components/Table";
+// import EditCategoriesModal from "./components/EditCategoriesModal";
 
 // Config
 import colors from "../config/colors";
 
 function AddExpenceScreen(props) {
   const [isAddRegisterOpen, setIsAddRegisterOpen] = React.useState(true);
+
+  // const [isEditingCategoriesOpen, setIsEditingCategoriesOpen] =
+  //   React.useState(false);
 
   const {
     registers,
@@ -60,6 +64,14 @@ function AddExpenceScreen(props) {
           handleSave={handleSave}
           handleCancel={handleCancel}
         />
+        {/* <EditCategoriesModal
+          isModalOpen={isEditingCategoriesOpen}
+          type="expence"
+          categories={categories}
+          headerText={"Edit expence categories"}
+          handleSave={"handleSave"}
+          handleCancel={() => setIsEditingCategoriesOpen(false)}
+        /> */}
       </View>
       <Table data={registers} type="expence" />
       <View style={styles.container}>
@@ -68,11 +80,11 @@ function AddExpenceScreen(props) {
           action={() => setIsAddRegisterOpen(true)}
           text="Add an Expence"
         />
-        <TouchableAction
+        {/* <TouchableAction
           containerStyles={styles.manageExpenceCategories}
-          action={() => console.log("TBD")}
+          action={() => setIsEditingCategoriesOpen(true)}
           text="Manage expence categories"
-        />
+        /> */}
       </View>
     </View>
   );

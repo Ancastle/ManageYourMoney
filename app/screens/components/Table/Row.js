@@ -1,12 +1,9 @@
 // External Libraries
 import * as React from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
+import { currencyFormat } from "../../utils/formatters";
 
 export default function Row(props) {
-  const currencyFormat = (num) => {
-    return "$" + num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-  };
-
   return props.isHeader ? (
     <View style={props.rowStyle}>
       <View style={(styles.col1, styles.col)}>

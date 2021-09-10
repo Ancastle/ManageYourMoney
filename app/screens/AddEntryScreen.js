@@ -10,12 +10,16 @@ import Header from "./components/Header";
 import AddRegisterModal from "./components/AddRegisterModal";
 import Table from "./components/Table";
 import TouchableAction from "./components/Touchables/TouchableAction";
+// import EditCategoriesModal from "./components/EditCategoriesModal";
 
 // Config
 import colors from "../config/colors";
 
 function AddEntryScreen(props) {
   const [isAddRegisterOpen, setIsAddRegisterOpen] = React.useState(true);
+
+  // const [isEditingCategoriesOpen, setIsEditingCategoriesOpen] =
+  //   React.useState(false);
 
   const {
     registers,
@@ -26,12 +30,8 @@ function AddEntryScreen(props) {
     storeRegisters,
   } = React.useContext(AppContext);
 
-  const handleSave = React.useCallback((newRegister) => {
+  const handleSaveRegisters = React.useCallback((newRegister) => {
     storeRegisters([newRegister, ...registers]);
-    setIsAddRegisterOpen(false);
-  });
-
-  const handleCancel = React.useCallback(() => {
     setIsAddRegisterOpen(false);
   });
 
@@ -53,13 +53,21 @@ function AddEntryScreen(props) {
         <AddRegisterModal
           isModalOpen={isAddRegisterOpen}
           type="entry"
-          headerText="Adding new entry"
           namePlaceholder="Entry name"
-          categories={categories}
+          headerText="Adding new entry"
           checkboxLabel="Is this entry from a loan?"
-          handleSave={handleSave}
-          handleCancel={handleCancel}
+          categories={categories}
+          handleSave={handleSaveRegisters}
+          handleCancel={() => setIsAddRegisterOpen(false)}
         />
+        {/* <EditCategoriesModal
+          isModalOpen={isEditingCategoriesOpen}
+          type="entry"
+          categories={categories}
+          headerText={"Edit entry categories"}
+          handleSave={"handleSave"}
+          handleCancel={() => setIsEditingCategoriesOpen(false)}
+        /> */}
       </View>
       <Table data={registers} type="entry" />
       <View style={styles.container}>
@@ -68,11 +76,11 @@ function AddEntryScreen(props) {
           action={() => setIsAddRegisterOpen(true)}
           text="Add an Entry"
         />
-        <TouchableAction
+        {/* <TouchableAction
           containerStyles={styles.manageEntryCategories}
-          action={() => console.log("TBD")}
+          action={() => setIsEditingCategoriesOpen(true)}
           text="Manage entry categories"
-        />
+        /> */}
       </View>
     </View>
   );

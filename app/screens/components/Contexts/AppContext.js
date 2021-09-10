@@ -8,13 +8,45 @@ export default function AppProvider({ children }) {
   const [registers, setRegisters] = React.useState([]);
 
   const [categories, setCategories] = React.useState([
-    { label: "Salario", value: "Salario", type: "entry" },
-    { label: "Comida", value: "Comida", type: "expence" },
-    { label: "Mercado", value: "Mercado", type: "expence" },
-    { label: "Lujos", value: "Lujos", type: "expence" },
-    { label: "Salida", value: "Salida", type: "expence" },
-    { label: "Lujo necesario", value: "Lujo necesario", type: "expence" },
-    { label: "No se que mas", value: "No se que mas", type: "expence" },
+    { label: "Salary", value: "Salary", type: "entry", enabled: true },
+    {
+      label: "Other entries",
+      value: "Other entries",
+      type: "entry",
+      enabled: true,
+    },
+    {
+      label: "Monthly payments",
+      value: "Monthly payments",
+      type: "expence",
+      enabled: true,
+    },
+    { label: "Home", value: "Home", type: "expence", enabled: true },
+    {
+      label: "Health and hygiene",
+      value: "Health and hygiene",
+      type: "expence",
+      enabled: true,
+    },
+    { label: "Transport", value: "Transport", type: "expence", enabled: true },
+    {
+      label: "Entertainment",
+      value: "Entertainment",
+      type: "expence",
+      enabled: true,
+    },
+    {
+      label: "Clothing",
+      value: "Clothing",
+      type: "expence",
+      enabled: true,
+    },
+    {
+      label: "Others",
+      value: "Others",
+      type: "expence",
+      enabled: true,
+    },
   ]);
 
   const [hasFetchedRegisters, setHasFetchedRegisters] = React.useState(false);
@@ -43,8 +75,8 @@ export default function AppProvider({ children }) {
     let aux = 0;
     registers.map((register) =>
       register.type === "entry"
-        ? (aux = aux - register.value)
-        : (aux = aux + register.value)
+        ? (aux = aux + register.value)
+        : (aux = aux - register.value)
     );
     return aux;
   }, [registers]);

@@ -1,6 +1,13 @@
 // External Libraries
 import * as React from "react";
-import { View, StyleSheet, Text, Modal, Pressable } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Modal,
+  Pressable,
+  ScrollView,
+} from "react-native";
 
 // Components
 import Row from "./Row";
@@ -29,48 +36,50 @@ export default function Table(props) {
 
   return (
     <View style={styles.gridContainer}>
-      {rowData && (
-        <Modal
-          visible={isDetailOpen}
-          animationIn={"slideInLeft"}
-          animationOut={"slideOutRight"}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text>Name: {rowData.name}</Text>
-              <Text>Value: {rowData.value}</Text>
-              <Text>Date: {`${rowData.day.day}/${rowData.day.month}`}</Text>
-              <Text>
-                Hour: {`${rowData.hour.hour}/${rowData.hour.minutes}`}
-              </Text>
-              <Text>Loan: {rowData.isLoan ? "Yes" : "No"}</Text>
-              <Text>
-                Type: {rowData.type === "entry" ? "Entry" : "Expence"}
-              </Text>
-              <View style={styles.actionContainer}>
-                <Pressable
-                  style={styles.button}
-                  onPress={() => setIsDetailOpen(false)}
-                >
-                  <Text style={styles.textStyle}>Ok</Text>
-                </Pressable>
+      <ScrollView style={styles.scrollable}>
+        {rowData && (
+          <Modal
+            visible={isDetailOpen}
+            animationIn={"slideInLeft"}
+            animationOut={"slideOutRight"}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text>Name: {rowData.name}</Text>
+                <Text>Value: {rowData.value}</Text>
+                <Text>Date: {`${rowData.day.day}/${rowData.day.month}`}</Text>
+                <Text>
+                  Hour: {`${rowData.hour.hour}/${rowData.hour.minutes}`}
+                </Text>
+                {/* <Text>Loan: {rowData.isLoan ? "Yes" : "No"}</Text> */}
+                <Text>
+                  Type: {rowData.type === "entry" ? "Entry" : "Expence"}
+                </Text>
+                <View style={styles.actionContainer}>
+                  <Pressable
+                    style={styles.button}
+                    onPress={() => setIsDetailOpen(false)}
+                  >
+                    <Text style={styles.textStyle}>Ok</Text>
+                  </Pressable>
+                </View>
               </View>
             </View>
-          </View>
-        </Modal>
-      )}
-      <Row isHeader rowStyle={styles.gridHeader} />
-      {data &&
-        data.map((register, index) => (
-          <Row
-            key={index}
-            handlePress={handlePress}
-            rowData={register}
-            rowStyle={
-              register.type === "expence" ? styles.expence : styles.entry
-            }
-          />
-        ))}
+          </Modal>
+        )}
+        <Row isHeader rowStyle={styles.gridHeader} />
+        {data &&
+          data.map((register, index) => (
+            <Row
+              key={index}
+              handlePress={handlePress}
+              rowData={register}
+              rowStyle={
+                register.type === "expence" ? styles.expence : styles.entry
+              }
+            />
+          ))}
+      </ScrollView>
     </View>
   );
 }
@@ -139,5 +148,9 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
+  },
+  scrollable: {
+    paddingRight: 4,
+    paddingLeft: 4,
   },
 });

@@ -8,6 +8,7 @@ import { AppContext } from "./components/Contexts/AppContext";
 // Components
 import Header from "./components/Header";
 import Table from "./components/Table";
+import { currencyFormat } from "./utils/formatters";
 
 // Config
 import colors from "../config/colors";
@@ -36,7 +37,12 @@ function ViewStatusScreen(props) {
         titleColor={colors.black}
       />
       <Table data={registers} />
-      <Text stlye={styles.total}>{totalBalance}</Text>
+      <View style={styles.addEntryButton}>
+        <Text style={styles.sectionButton}>Total Balance</Text>
+      </View>
+      <View style={styles.viewStatusButton}>
+        <Text style={styles.sectionButton}>{currencyFormat(totalBalance)}</Text>
+      </View>
     </View>
   );
 }
@@ -47,6 +53,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   total: { bottom: 15, fontSize: 20 },
+  sectionButton: {
+    fontWeight: "bold",
+    fontSize: 20,
+  },
+  viewStatusButton: {
+    width: "100%",
+    height: 70,
+    backgroundColor: colors.light,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  addEntryButton: {
+    width: "100%",
+    height: 70,
+    backgroundColor: colors.base,
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
 
 export default ViewStatusScreen;
